@@ -57,11 +57,13 @@ def get_video_details(video_ids, date_keyword):
     results = []
     for item in items:
         title = item["snippet"]["title"]
-        views = int(item["statistics"].get("viewCount", 0))
+        views = item["statistics"].get("viewCount", 0)
         
         # 🎯 날짜 포함 + 'KBO 리그' 포함하는 영상만
         if date_keyword in title and 'KBO 리그' in title:
             results.append({"title": title, "views": views})
+            
+    print(results)
     return results
 
 
@@ -77,7 +79,6 @@ def get_view_data(filtered_videos):
             view_data[f"{team1}"] = views
             view_data[f"{team2}"] = views
 
-    print(view_data)
     return view_data
 
 

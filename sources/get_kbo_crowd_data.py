@@ -32,8 +32,6 @@ def get_kbo_crowd_data():
                 crowd_data[f"{out_team_name}"] = crowd_number
                 crowd_data[f"{home_team_name}"] = crowd_number
                 
-                print(crowd_data)
-
         except Exception as e:
             print(f"날짜 파싱 오류: {e}")
 

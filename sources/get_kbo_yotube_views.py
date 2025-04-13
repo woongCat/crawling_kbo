@@ -21,6 +21,8 @@ def get_kbo_yotube_views():
     filtered_videos = get_video_details(video_ids, yesterday_str)
     view_data = get_view_data(filtered_videos)
     
+    print(view_data)
+    
     return view_data
 
 # 영상 ID 수집
@@ -37,6 +39,7 @@ def get_video_ids(channel_id, max_results=20):
     response = requests.get(search_url, params=params)
     response.raise_for_status()
     items = response.json().get("items", [])
+    print(items)
     return [item["id"]["videoId"] for item in items]
 
 

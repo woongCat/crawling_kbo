@@ -4,7 +4,10 @@ from datetime import datetime, timedelta, timezone
 
 import requests
 
-# 환경변수 불러오기
+# from dotenv import load_dotenv
+# 로컬에서 환경변수 불러오기
+# load_dotenv()
+
 API_KEY = os.environ.get("YOUTUBE_KEY")
 
 # TVINGSPORTS 채널 ID

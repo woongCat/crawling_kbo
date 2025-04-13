@@ -5,7 +5,7 @@ from datetime import datetime, timedelta, timezone
 import requests
 
 # from dotenv import load_dotenv
-# 로컬에서 환경변수 불러오기
+# # 로컬에서 환경변수 불러오기
 # load_dotenv()
 
 API_KEY = os.environ.get("YOUTUBE_KEY")
@@ -42,6 +42,7 @@ def get_video_ids(channel_id, max_results=20):
     response = requests.get(search_url, params=params)
     response.raise_for_status()
     items = response.json().get("items", [])
+    print(items)
     return [item["id"]["videoId"] for item in items]
 
 
@@ -52,18 +53,16 @@ def get_video_details(video_ids, date_keyword):
     response = requests.get(details_url, params=params)
     response.raise_for_status()
     items = response.json().get("items", [])
-    print(items)
 
     results = []
     for item in items:
         title = item["snippet"]["title"]
-        views = item["statistics"].get("viewCount", 0)
-        
-        # 🎯 날짜 포함 + 'KBO 리그' 포함하는 영상만
-        if date_keyword in title and 'KBO 리그' in title:
+        views = int(item["statistics"].get("viewCount", 0))
+        print(views)
+
+        # 🎯 조건: 날짜 포함 + 'KBO 리그' 포함 + '#shorts' 미포함
+        if date_keyword in title and 'KBO 리그' in title and '#shorts' not in title:
             results.append({"title": title, "views": views})
-            
-    print(results)
     return results
 
 

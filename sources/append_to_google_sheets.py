@@ -19,9 +19,9 @@ def append_to_google_sheets(view_data: dict, crowd_data: dict, winrate_data: dic
     for team in winrate_data.keys():
         try:
             worksheet = sheet.worksheet(team)
-            views = view_data.get(team, '없음')
-            crowd = crowd_data.get(team, '없음')
-            winrate = winrate_data.get(team, '없음')
+            views = view_data.get(team, '-')
+            crowd = crowd_data.get(team, '-')
+            winrate = winrate_data.get(team, '-')
 
             row = [today_str, winrate, crowd, views, '']  # 날짜, 승률, 관중수, 영상 조회수, 좋아요 수
             worksheet.append_row(row)

@@ -36,7 +36,8 @@ def get_kbo_yotube_views():
     return view_data
 
 
-def get_video_ids(channel_id, max_results=20):
+def get_video_ids(channel_id, max_results=50):
+    start_of_day = datetime.combine(yesterday_kst, datetime.min.time()).isoformat() + "+09:00"
     search_url = "https://www.googleapis.com/youtube/v3/search"
     params = {
         "key": API_KEY,
@@ -45,6 +46,7 @@ def get_video_ids(channel_id, max_results=20):
         "order": "date",
         "maxResults": max_results,
         "type": "video",
+        "publishedAfter": start_of_day,
     }
     response = requests.get(search_url, params=params)
     response.raise_for_status()
@@ -74,7 +76,7 @@ def get_video_details(video_ids, date_keyword):
         logger.debug(f"🎯 제목: {title}, 조회수: {views}")
 
         # 필터링 조건: 날짜 + 'KBO 리그' + '#shorts' 미포함
-        if date_keyword in title and 'KBO 리그' in title and '#shorts' not in title:
+        if date_keyword in title and 'KBO 리그' in title:
             results.append({"title": title, "views": views})
     
     logger.info(f"📊 필터된 영상 수: {len(results)}")

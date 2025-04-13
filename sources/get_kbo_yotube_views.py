@@ -39,7 +39,6 @@ def get_video_ids(channel_id, max_results=20):
     response = requests.get(search_url, params=params)
     response.raise_for_status()
     items = response.json().get("items", [])
-    print(items)
     return [item["id"]["videoId"] for item in items]
 
 
@@ -50,6 +49,7 @@ def get_video_details(video_ids, date_keyword):
     response = requests.get(details_url, params=params)
     response.raise_for_status()
     items = response.json().get("items", [])
+    print(items)
 
     results = []
     for item in items:
@@ -73,7 +73,8 @@ def get_view_data(filtered_videos):
             team1, team2 = match.group(1), match.group(2)
             view_data[f"{team1}"] = views
             view_data[f"{team2}"] = views
-            
+
+    print(view_data)
     return view_data
 
 

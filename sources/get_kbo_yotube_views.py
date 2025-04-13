@@ -52,7 +52,8 @@ def get_video_ids(channel_id, max_results=50):
         "order": "date",
         "maxResults": max_results,
         "type": "video",
-        "publishedAfter": yesterday_start
+        "publishedAfter": yesterday_start,
+        "regionCode": "KR",  # 🌏 한국 기준 결과 요청
     }
     response = requests.get(search_url, params=params)
     response.raise_for_status()

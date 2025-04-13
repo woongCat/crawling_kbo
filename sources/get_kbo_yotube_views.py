@@ -3,11 +3,9 @@ import re
 from datetime import datetime, timedelta, timezone
 
 import requests
-from dotenv import load_dotenv
 
 # 환경변수 불러오기
-load_dotenv()
-API_KEY = os.getenv("YOUTUBE_KEY")
+API_KEY = os.environ.get("YOUTUBE_KEY")
 
 # TVINGSPORTS 채널 ID
 CHANNEL_ID = "UC8JtQf77wqhVpOQ8Cze8JjA"
@@ -87,3 +85,4 @@ if __name__ == "__main__":
         
     except Exception as e:
         print("⚠️ 오류 발생:", e)
+        

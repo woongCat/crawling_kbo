@@ -15,7 +15,7 @@ if __name__ == "__main__":
         winrate_data = get_kbo_team_winrate_data()
 
         # 4. 스프레드시트에 저장
-        append_to_google_sheets(view_data, crowd_data, winrate_data)
+        append_to_google_sheets(crowd_data, winrate_data)
 
     except Exception as e:
         print("⚠️ 전체 실행 오류:", e)

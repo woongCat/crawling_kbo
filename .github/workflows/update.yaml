@@ -2,7 +2,7 @@ name: Daily KBO YouTube Update
 
 on:
   schedule:
-    - cron: '55 9 * * *'  # 매일 15:00 KST = 06:00 UTC
+    - cron: '0 10 * * *'  # 매일 15:00 KST = 06:00 UTC
   workflow_dispatch:  # 수동 실행도 가능
 
 jobs:

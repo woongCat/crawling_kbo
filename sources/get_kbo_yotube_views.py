@@ -5,9 +5,9 @@ from datetime import datetime, timedelta, timezone
 import requests
 from loguru import logger
 
-# from dotenv import load_dotenv
-# # 로컬에서 환경변수 불러오기
-# load_dotenv()
+from dotenv import load_dotenv
+# 로컬에서 환경변수 불러오기
+load_dotenv()
 
 
 # logger 설정
@@ -37,7 +37,13 @@ def get_kbo_yotube_views():
 
 
 def get_video_ids(channel_id, max_results=50):
-    start_of_day = datetime.combine(yesterday_kst, datetime.min.time()).isoformat() + "+09:00"
+    KST = timezone(timedelta(hours=9))
+    yesterday_start = datetime.combine(
+        datetime.now(KST).date() - timedelta(days=1),
+        datetime.min.time(),
+        tzinfo=KST
+    ).isoformat()  # '2025-04-12T00:00:00+09:00'
+
     search_url = "https://www.googleapis.com/youtube/v3/search"
     params = {
         "key": API_KEY,
@@ -46,7 +52,7 @@ def get_video_ids(channel_id, max_results=50):
         "order": "date",
         "maxResults": max_results,
         "type": "video",
-        "publishedAfter": start_of_day,
+        "publishedAfter": yesterday_start
     }
     response = requests.get(search_url, params=params)
     response.raise_for_status()
@@ -54,7 +60,7 @@ def get_video_ids(channel_id, max_results=50):
 
     logger.debug(f"🔍 검색된 영상 수: {len(items)}")
     logger.debug(f"📋 Raw video list: {[item['snippet']['title'] for item in items]}")
-    
+
     return [item["id"]["videoId"] for item in items]
 
 

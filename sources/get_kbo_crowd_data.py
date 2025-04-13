@@ -26,11 +26,13 @@ def get_kbo_crowd_data():
             if date == yesterday_str:
                 # 예: '[두산-LG]' → 두산, LG
                 home_team_name = cols[2].text.strip()
-                out_team_name = cols[2].text.strip()
+                out_team_name = cols[3].text.strip()
                 crowd_number = cols[5].text.strip()
 
                 crowd_data[f"{out_team_name}"] = crowd_number
                 crowd_data[f"{home_team_name}"] = crowd_number
+                
+                print(crowd_data)
 
         except Exception as e:
             print(f"날짜 파싱 오류: {e}")

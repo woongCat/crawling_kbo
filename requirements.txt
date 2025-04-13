@@ -1,8 +1,7 @@
 requests
 beautifulsoup4
-selenium
+
 google-api-python-client
 python-dotenv
-
 gspread
 oauth2client

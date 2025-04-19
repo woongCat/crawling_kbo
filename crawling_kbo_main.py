@@ -1,7 +1,7 @@
-from sources.append_to_google_sheets import append_to_google_sheets
-from sources.get_kbo_crowd_data import get_kbo_crowd_data
-from sources.get_kbo_team_winrate_data import get_kbo_team_winrate_data
-from sources.get_kbo_yotube_views import get_kbo_yotube_views
+from crawling_kbo.sources.append_to_google_sheets import append_to_google_sheets
+from crawling_kbo.sources.get_kbo_crowd_data import get_kbo_crowd_data
+from crawling_kbo.sources.get_kbo_team_winrate_data import get_kbo_team_winrate_data
+from crawling_kbo.sources.get_kbo_yotube_views import get_kbo_yotube_views
 
 if __name__ == "__main__":
     try:

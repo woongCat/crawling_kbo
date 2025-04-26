@@ -1,8 +1,0 @@
-requests
-beautifulsoup4
-
-google-api-python-client
-python-dotenv
-gspread
-oauth2client
-loguru

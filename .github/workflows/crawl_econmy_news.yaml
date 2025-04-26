@@ -31,7 +31,7 @@ jobs:
 
     - name: Run crawling script
       run: |
-        python crawl_news.py
+        python -m learning_crawling.crawling_economy_news
 
     - name: Commit and push if changes
       run: |

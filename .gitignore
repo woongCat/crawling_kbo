@@ -175,3 +175,6 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# 레포와 상관 없는 데이터들
+data_project/

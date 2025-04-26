@@ -9,7 +9,8 @@ from dotenv import load_dotenv
 # 로컬에서 환경변수 불러오기
 load_dotenv()
 
-
+# FIXME: github action 내에서 값이 제대로 안 가져와지는 부분 확인해야 함
+# FIXME: 안 되면 그냥 클릭해서 가져오도록 만들기
 # logger 설정
 logger.add("logs/youtube_kbo.log", rotation="1 MB", level="DEBUG")
 logger.add(lambda msg: print(msg, end=""), level="INFO")  # stdout에도 출력
@@ -36,24 +37,16 @@ def get_kbo_yotube_views():
     return view_data
 
 
-def get_video_ids(channel_id, max_results=50):
-    KST = timezone(timedelta(hours=9))
-    yesterday_start = datetime.combine(
-        datetime.now(KST).date() - timedelta(days=1),
-        datetime.min.time(),
-        tzinfo=KST
-    ).isoformat()  # '2025-04-12T00:00:00+09:00'
-
+def get_video_ids(channel_id, max_results=30):
     search_url = "https://www.googleapis.com/youtube/v3/search"
     params = {
         "key": API_KEY,
         "channelId": channel_id,
         "part": "snippet",
-        "order": "date",
+        "order": "date",            # 최신순 정렬
         "maxResults": max_results,
         "type": "video",
-        "publishedAfter": yesterday_start,
-        "regionCode": "KR",  # 🌏 한국 기준 결과 요청
+        "regionCode": "KR",
     }
     response = requests.get(search_url, params=params)
     response.raise_for_status()

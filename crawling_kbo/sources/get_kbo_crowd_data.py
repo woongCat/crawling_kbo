@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-# 관중 수 테이블에서 어제 날짜 기준 데이터 가져오기
+# ✅ 관중 수 테이블에서 어제 날짜 기준 데이터 가져오기
 def get_kbo_crowd_data():
     url = "https://www.koreabaseball.com/Record/Crowd/GraphDaily.aspx"
     response = requests.get(url)
@@ -27,7 +27,8 @@ def get_kbo_crowd_data():
                 # 예: '[두산-LG]' → 두산, LG
                 home_team_name = cols[2].text.strip()
                 out_team_name = cols[3].text.strip()
-                crowd_number = cols[5].text.strip()
+                # 예: '2,000' → 2000
+                crowd_number = int(cols[5].text.strip().replace(',', ''))
 
                 crowd_data[f"{out_team_name}"] = crowd_number
                 crowd_data[f"{home_team_name}"] = crowd_number
